@@ -1,5 +1,5 @@
 import java.io.File;
-        import java.io.FileNotFoundException;
+import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -71,18 +71,38 @@ public class Main {
         String decompressedString = "";
         int startStr = 0;
         int endStr = 0;
-        int startInt = 0;
         int endInt = 0;
+        int num = 0;
+        String newSub;
+        int fullNum=0;
         for (int i=0; i < compressedString.length() ; i++) {
             endStr++;
-            startInt = i;
-            while (compressedString.charAt(i) < 'A') {
+            int num2 = compressedString.charAt(i);
+            while (num2 < 'A') {
+                num = num2 - '0';
+                fullNum = fullNum*10 + num;
+                if (i < (compressedString.length() - 1)){
+                    i++;
+                    num2 = compressedString.charAt(i);
+                }
+                else{
+                    break;
+                }
+            }
+            endInt = i;
+
+            //num = compressedString.substring(startInt, endInt+1);
+            //int finalNum = Integer.parseInt(num);
+            newSub = compressedString.substring(startStr, endStr);
+            for (int j=0; j<fullNum; j++){
+                decompressedString = decompressedString + newSub;
+            }
+            fullNum = 0;
+            if (endInt+1 < compressedString.length()){
+                startStr= endInt+1;
+                endStr = endInt+1;
                 endInt++;
             }
-            String substring(startStr, endStr);
-            decompressedString = substring(startInt, endInt) + ;
-            startStr = endStr + 2;
-
         }
         return decompressedString;
     }
@@ -127,6 +147,7 @@ public class Main {
         //File file = new File(filePath);
         //Scanner scanner = new Scanner(file);
         Scanner scanner = new Scanner(System.in);
+        //String decompressedString = decompressString("abc3");
 
         // Tests for part A
         /* System.out.println("---------- Tests for part A ----------");
@@ -147,6 +168,8 @@ public class Main {
             System.out.println("The compressed version of " + stringToCompress + " is " + compressedString);
         }
 
+
+*/
         // Tests for part B2
         System.out.println("\n---------- Tests for part B2 ----------");
         int numberOfDecompressedStrings = scanner.nextInt();
@@ -168,14 +191,14 @@ public class Main {
             boolean isEqual = stringToCompress.equals(decompressedString);
             System.out.println("decompress(compress(" + stringToCompress + ")) == " + stringToCompress + "? " + isEqual);
         }
-*/
-        // Tests for part C
+
+       /* // Tests for part C
         System.out.println("\n---------- Tests for part C ----------");
         int numberOfSalaries = scanner.nextInt();
         for (int i = 0; i < numberOfSalaries; i++) {
             int salary = scanner.nextInt();
             double tax = calculateTax(salary);
             System.out.println("The tax for salary of " + salary + "₪ is " + tax + "₪");
-        }
+        }*/
     }
 }
