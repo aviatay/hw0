@@ -70,7 +70,7 @@ public class Main {
     public static String decompressString(String compressedString) {
         String decompressedString = "";
         int startStr = 0;
-        int endStr = 0;
+        int endStr = -1;
         int endInt = 0;
         int num = 0;
         String newSub;
@@ -90,19 +90,16 @@ public class Main {
                 }
             }
             endInt = i;
-
-            //num = compressedString.substring(startInt, endInt+1);
-            //int finalNum = Integer.parseInt(num);
             newSub = compressedString.substring(startStr, endStr);
             for (int j=0; j<fullNum; j++){
                 decompressedString = decompressedString + newSub;
+                if ((endInt+1 < compressedString.length()) && (j == fullNum - 1)){
+                    startStr= endInt;
+                    endStr = endInt;
+                    endInt++;
+                }
             }
             fullNum = 0;
-            if (endInt+1 < compressedString.length()){
-                startStr= endInt+1;
-                endStr = endInt+1;
-                endInt++;
-            }
         }
         return decompressedString;
     }
@@ -143,14 +140,13 @@ public class Main {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        //String filePath = args[0];
-        //File file = new File(filePath);
-        //Scanner scanner = new Scanner(file);
+        String filePath = args[0];
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
         Scanner scanner = new Scanner(System.in);
-        //String decompressedString = decompressString("abc3");
 
         // Tests for part A
-        /* System.out.println("---------- Tests for part A ----------");
+        System.out.println("---------- Tests for part A ----------");
         int numberOfGrades = scanner.nextInt();
         for (int i = 0; i < numberOfGrades; i++) {
             int grade = scanner.nextInt();
@@ -169,7 +165,7 @@ public class Main {
         }
 
 
-*/
+
         // Tests for part B2
         System.out.println("\n---------- Tests for part B2 ----------");
         int numberOfDecompressedStrings = scanner.nextInt();
@@ -192,13 +188,13 @@ public class Main {
             System.out.println("decompress(compress(" + stringToCompress + ")) == " + stringToCompress + "? " + isEqual);
         }
 
-       /* // Tests for part C
+        // Tests for part C
         System.out.println("\n---------- Tests for part C ----------");
         int numberOfSalaries = scanner.nextInt();
         for (int i = 0; i < numberOfSalaries; i++) {
             int salary = scanner.nextInt();
             double tax = calculateTax(salary);
             System.out.println("The tax for salary of " + salary + "₪ is " + tax + "₪");
-        }*/
+        }
     }
 }
