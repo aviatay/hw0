@@ -72,27 +72,27 @@ public class Main {
         int startStr = 0;
         int endStr = -1;
         int endInt = 0;
-        int num = 0;
-        String newSub;
+        int asciiNum = 0;
+        String newSubstring;
         int fullNum=0;
         for (int i=0; i < compressedString.length() ; i++) {
             endStr++;
-            int num2 = compressedString.charAt(i);
-            while (num2 < 'A') {
-                num = num2 - '0';
-                fullNum = fullNum*10 + num;
+            int charNum = compressedString.charAt(i);
+            while (charNum < 'A') {
+                asciiNum = charNum - '0';
+                fullNum = fullNum*10 + asciiNum;
                 if (i < (compressedString.length() - 1)){
                     i++;
-                    num2 = compressedString.charAt(i);
+                    charNum = compressedString.charAt(i);
                 }
                 else{
                     break;
                 }
             }
             endInt = i;
-            newSub = compressedString.substring(startStr, endStr);
+            newSubstring = compressedString.substring(startStr, endStr);
             for (int j=0; j<fullNum; j++){
-                decompressedString = decompressedString + newSub;
+                decompressedString = decompressedString + newSubstring;
                 if ((endInt+1 < compressedString.length()) && (j == fullNum - 1)){
                     startStr= endInt;
                     endStr = endInt;
@@ -143,7 +143,7 @@ public class Main {
         String filePath = args[0];
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
 
         // Tests for part A
         System.out.println("---------- Tests for part A ----------");
