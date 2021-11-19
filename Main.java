@@ -108,6 +108,7 @@ public class Main {
      * Calculates the tax of a given salary.
      *
      * The tax is calculated according to the tax brackets method.
+     * The tax is rounded up to two decimal places.
      *
      * @param salary The salary
      * @return The tax for the given salary
