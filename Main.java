@@ -44,12 +44,12 @@ public class Main {
      */
     public static String compressString(String stringToCompress) {
         String compressedString = "";
-        int count = 0;
+        int countLetter = 0;
         for (int i=0; i< stringToCompress.length(); i++){
-            count++;
+            countLetter++;
             if ( (i+1 >= stringToCompress.length()) || (stringToCompress.charAt(i) != stringToCompress.charAt(i+1) )) {
-                compressedString = compressedString + stringToCompress.charAt(i) + count;
-                count = 0;
+                compressedString = compressedString + stringToCompress.charAt(i) + countLetter;
+                countLetter = 0;
             }
         }
         return compressedString;
@@ -143,7 +143,6 @@ public class Main {
         String filePath = args[0];
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
-        //Scanner scanner = new Scanner(System.in);
 
         // Tests for part A
         System.out.println("---------- Tests for part A ----------");
@@ -152,7 +151,6 @@ public class Main {
             int grade = scanner.nextInt();
             gradeMessage(grade);
         }
-
 
         // Tests for part B1
         System.out.println("\n---------- Tests for part B1 ----------");
@@ -163,8 +161,6 @@ public class Main {
             String compressedString = compressString(stringToCompress);
             System.out.println("The compressed version of " + stringToCompress + " is " + compressedString);
         }
-
-
 
         // Tests for part B2
         System.out.println("\n---------- Tests for part B2 ----------");
